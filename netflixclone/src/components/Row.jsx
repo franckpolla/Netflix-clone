@@ -2,11 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-// import { FaHeart, FaRegheart } from "react-icons/fa";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import Movie from "./Movie";
 
-function Row(props) {
+function Row(props, { rowID }) {
   const [movies, setMovies] = useState([]);
-  const [like, setLike] = useState(false);
 
   useEffect(() => {
     const fecthData = async () => {
@@ -19,32 +19,41 @@ function Row(props) {
     };
     fecthData();
   }, [props.fetchURL]);
-
   console.log(movies);
 
+  const slideLeft = () => {
+    let slider = document.getElementById("slider" + rowID);
+    slider.scrollLeft -= 500;
+  };
+  const slideRight = () => {
+    let slider = document.getElementById("slider" + rowID);
+    slider.scrollLeft += 500;
+  };
+
   return (
-    <>
+    <div>
       <h2 className="text-white font-bold md:text-xl p-4"> {props.title}</h2>
-      <div className="relative flex items-center">
-        <div id={"slider"}>
+      <div className="relative flex items-center group">
+        <MdChevronLeft
+          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
+          size={40}
+          onClick={slideLeft}
+        />
+        <div
+          id={"slider" + rowID}
+          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
+        >
           {movies.map((item, id) => (
-            <div className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[200px] inline-block cursor-pointer relative p-2">
-              <img
-                className="w-full h-auto block"
-                src={`https://image.tmdb.org/t/p/original/${item?.backdrop_path}`}
-                alt={item?.title}
-              />
-              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80  hover:opacity-100 text-white opacity-0">
-                <p className="white-space-normal t text-xs md:text-sm font-bold items-center h-full text-center flex justify-center">
-                  {item?.title}
-                </p>
-                {/* <p>{like ? <FaHeart /> : <FaRegheart />}</p> */}
-              </div>
-            </div>
+            <Movie key={id} item={item} />
           ))}
         </div>
+        <MdChevronRight
+          className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
+          size={40}
+          onClick={slideRight}
+        />
       </div>
-    </>
+    </div>
   );
 }
 

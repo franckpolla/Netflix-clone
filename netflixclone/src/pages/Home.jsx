@@ -1,18 +1,18 @@
-import React from 'react'
-import { MainComponent } from '../components/MainComponent'
- import Row from '../components/Row';
- import requests from '../Request';
+import React from "react";
+import { MainComponent } from "../components/MainComponent";
+import Row from "../components/Row";
+import requests from "../Request";
 function Home() {
   return (
     <div>
-        <MainComponent />
-        <Row title="Upcomimg" fetchURL={requests.requestUpcoming}/>
-        <Row title="Popular" fetchURL={requests.requestPopular}/>
-        <Row title="Trending" fetchURL={requests.requestTrending}/>
-        <Row title="Top Rated" fetchURL={requests.requestTopRated}/>
-        <Row title="Horror" fetchURL={requests.requestHorror}/>
+      <MainComponent />
+      <Row rowID="1" title="Upcomimg" fetchURL={requests.requestUpcoming} />
+      <Row rowID="2" title="Popular" fetchURL={requests.requestPopular} />
+      <Row rowID="3" title="Trending" fetchURL={requests.requestTrending} />
+      <Row rowID="4" title="Top Rated" fetchURL={requests.requestTopRated} />
+      <Row rowID="5" title="Horror" fetchURL={requests.requestHorror} />
     </div>
-  )
+  );
 }
 
 export default Home;
