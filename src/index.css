@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities"; 
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto:ital,wght@1,400;1,900&family=Space+Mono&display=swap');
+
+
+body{
+  background-color: black;
+  font-family: "lato" 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
